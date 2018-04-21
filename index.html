@@ -11,7 +11,7 @@
 			margin-top:20%;
 		}
 
-		#magic{
+		#magic, #remember{
 			color: #777;
 			border-right: 1px solid #777;
 			padding-right: 7px;
@@ -23,18 +23,29 @@
 
 	Coding is <div id="magic"></div>
 
+	<h1>Think about</h1>
+	<h2 id="remember"></h2>
+
 	<script>
 
 		var words = ["fun", "exciting", "about not giving up", "being helpful", "being open", "what I learned at CodingDojo!"],
 			el = document.getElementById('magic'),
+			el2 = document.getElementById('remember'),
 			word_counter = 0,
+			idx,
 			character_counter = 0;
 
 		function updateText()
 		{
-			el.innerHTML = el.innerHTML+words[word_counter][character_counter++];
+			if(words[word_counter][character_counter] === ' '){
+					el.innerHTML = el.innerHTML +  '&nbsp';
+					character_counter ++;
+			}else{
+				el.innerHTML = el.innerHTML+words[word_counter][character_counter++];
 
-			if(character_counter == words[word_counter].length)
+			}
+
+			if(character_counter == words[word_counter].length+1)
 			{
 				word_counter++; 	//choose a different word
 				character_counter = 0;	//start over with the first character of the word
@@ -44,9 +55,23 @@
 				if(word_counter == words.length)
 					word_counter = 0;
 			}
-		}
+		};
+		setInterval(updateText,400);
+		
 
-		setInterval(updateText,300);
+		var things = ['your family', 'your friends', 'the people around you', 'your future', 'the future of others',
+						'the others who live on this planet', 'the animals who share our world', 'the forests that clean our air', 
+						'the world your children will inherit', 'how many animals die each day', 
+						"how many animals' homes are destroyed each day", 'if you want your children to know what an elephant is', 
+						'if you want your children to know what an open sky looks like', 'if you want swimming in clean rivers to become a distant memory'];
+		
+		function thinkAboutThis()
+		{
+			el2.innerHTML = el2.innerHTML+things[idx++];
+
+
+		};
+		setInterval(updateText, 300);
 
 	</script>
 
